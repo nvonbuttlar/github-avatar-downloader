@@ -17,15 +17,16 @@ function getRepoContributors(repoOwner, repoName, cb) {
     var parsedJSON = JSON.parse(body);
     cb(err, parsedJSON);
   });
+
+
 }
 
 
 getRepoContributors("jquery", "jquery", function(err, results) {
-  console.log("Errors: ", err);
-  results.forEach(function(result){
-    console.log(result.avatar_url);
-  })
 
+  for (var key in results) {
+    downloadImageByURL(results[key].avatar_url, "avatars/" + results[key].login + ".png")
+  }
 
 });
 
@@ -50,7 +51,7 @@ function downloadImageByURL(url, filePath) {
   })
 
 
-   .pipe(fs.createWriteStream(filePath));
+  .pipe(fs.createWriteStream(filePath));
 
 }
 
