@@ -1,3 +1,6 @@
+var owner = process.argv[2]
+var name = process.argv[3]
+
 var request = require('request');
 var fs = require('fs')
 
@@ -22,7 +25,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 
-getRepoContributors("jquery", "jquery", function(err, results) {
+getRepoContributors(owner, name, function(err, results) {
 
   for (var key in results) {
     downloadImageByURL(results[key].avatar_url, "avatars/" + results[key].login + ".png")
@@ -55,7 +58,7 @@ function downloadImageByURL(url, filePath) {
 
 }
 
-downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg");
+
 
 
 
